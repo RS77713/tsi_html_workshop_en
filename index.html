@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edgar's HTML5 Workshop</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Edgar's HTML5 Laboratory 🚀</h1>
+
+        <p>
+            Edgar fights HTML bugs while Shakespeare gives
+            completely unnecessary advice.
+        </p>
+    </header>
+
+    <main>
+        <!-- TASK 2: GET AND POST -->
+
+        <section>
+            <h2>Task 2: Edgar's Secret Message Station</h2>
+
+            <h3>GET — Edgar Shouts It 📢</h3>
+
+            <form action="https://httpbin.org/get" method="get">
+                <input
+                    type="text"
+                    name="message"
+                    value="Edgar defeated another HTML bug"
+                >
+
+                <button type="submit">Shout it!</button>
+            </form>
+
+            <h3>POST — Edgar Hides It 🤫</h3>
+
+            <form action="https://httpbin.org/post" method="post">
+                <input
+                    type="text"
+                    name="message"
+                    value="Edgar borrowed Shakespeare's keyboard"
+                >
+
+                <button type="submit">Lets Send!</button>
+            </form>
+        </section>
+
+        <hr>
+
+        <!-- EDGAR'S GITHUB API FORM -->
+
+        <section>
+            <h2>Edgar's GitHub Control Panel 🧑‍💻</h2>
+
+            <p>
+                Enter a GitHub username and inspect what the coding universe
+                knows about it.
+            </p>
+
+            <form onsubmit="event.preventDefault(); getData(event.submitter.value)">
+                <label for="username">GitHub username:</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    value="rs77713"
+                    required
+                >
+
+                <button type="submit" value="followers">
+                    Followers
+                </button>
+
+                <button type="submit" value="repos">
+                    Repositories
+                </button>
+
+                <button type="submit" value="events/public">
+                    Events
+                </button>
+
+                <button type="submit" value="gists">
+                    Gists
+                </button>
+            </form>
+
+            <pre id="result">GitHub results will appear here...</pre>
+        </section>
+
+        <hr>
+
+        <!-- TASK 3: ADVANCED HTML FORM -->
+
+        <section>
+            <h2>Task 3: Join Edgar's Coding Kingdom 👑</h2>
+
+            <p>
+                Edgar needs brave developers who are not afraid of missing
+                closing tags.
+            </p>
+
+            <form
+                action="https://httpbin.org/get"
+                method="get"
+                target="_blank"
+                name="coding_application"
+                autocomplete="on"
+            >
+                <p>
+                    <label for="hero-name">
+                        Your coding hero name:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="hero-name"
+                        name="hero_name"
+                        placeholder="Sir Fix-a-Lot"
+                        required
+                    >
+                </p>
+
+                <p>
+                    <label for="power">
+                        Choose your coding power:
+                    </label>
+
+                    <select id="power" name="power" required>
+                        <option value="">Choose one</option>
+                        <option value="html">
+                            Speaking fluent HTML
+                        </option>
+                        <option value="bugs">
+                            Scaring away bugs
+                        </option>
+                        <option value="coffee">
+                            Creating endless coffee
+                        </option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="mission">
+                        Describe your first mission:
+                    </label>
+                </p>
+
+                <textarea
+                    id="mission"
+                    name="mission"
+                    rows="4"
+                    cols="35"
+                    placeholder="Save Edgar from a missing closing tag..."
+                    required
+                ></textarea>
+
+                <p>
+                    <input
+                        type="checkbox"
+                        id="promise"
+                        name="promise"
+                        value="yes"
+                        required
+                    >
+
+                    <label for="promise">
+                        I promise not to create boring websites.
+                    </label>
+                </p>
+
+                <button type="submit">
+                    Join the kingdom!
+                </button>
+            </form>
+        </section>
+
+        <hr>
+
+        <!-- TASK 4: YOUTUBE VIDEO -->
+
+        <section>
+            <h2>Task 4: Edgar and Shakespeare's Music Break 🎵</h2>
+
+            <p>
+                Shakespeare asked, “To dance, or not to dance?”
+                Edgar ignored him and pressed play.
+            </p>
+
+            <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                title="Edgar and Shakespeare's music break"
+                allowfullscreen
+            ></iframe>
+        </section>
+
+        <hr>
+
+        <!-- TASK 5: GEOLOCATION -->
+
+        <section>
+            <h2>Task 5: Where Is Edgar Hiding? 🧭</h2>
+
+            <p>
+                Let the browser try to find Edgar before Shakespeare does.
+            </p>
+
+            <button type="button" onclick="findEdgar()">
+                Find Edgar
+            </button>
+
+            <p id="location-result">
+                Edgar's location is currently a mystery...
+            </p>
+        </section>
+
+        <hr>
+
+        <!-- TASK 6: DRAG AND DROP -->
+
+        <section>
+            <h2>Task 6: Feed Edgar's Coding Dragon 🐉</h2>
+
+            <p>
+                Drag Edgar's cookie into the dragon's lunch box.
+            </p>
+
+            <div
+                id="edgar-cookie"
+                draggable="true"
+                ondragstart="dragCookie(event)"
+            >
+                Edgar's Cookie 🍪
+            </div>
+
+            <div
+                id="dragon-box"
+                ondragover="allowCookie(event)"
+                ondrop="dropCookie(event)"
+            >
+                <p id="dragon-message">
+                    The coding dragon is waiting for lunch...
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            Created by Edgar — several bugs were frightened during this workshop.
+        </p>
+    </footer>
+
+    <script>
+        // GitHub information
+        async function getData(type) {
+            const user = document.getElementById("username").value;
+            const result = document.getElementById("result");
+
+            result.textContent = "Edgar is asking GitHub...";
+
+            try {
+                const response = await fetch(
+                    `https://api.github.com/users/${encodeURIComponent(user)}/${type}`
+                );
+
+                const data = await response.json();
+
+                const field = {
+                    followers: "login",
+                    repos: "name",
+                    "events/public": "type",
+                    gists: "id"
+                }[type];
+
+                if (!Array.isArray(data)) {
+                    result.textContent = "GitHub returned a mysterious answer.";
+                    return;
+                }
+
+                if (data.length === 0) {
+                    result.textContent = "Nothing found. Even Shakespeare is confused.";
+                    return;
+                }
+
+                result.textContent =
+                    data.map(item => item[field]).join("\n");
+            } catch (error) {
+                result.textContent =
+                    "GitHub escaped before Edgar could catch it.";
+            }
+        }
+
+        // Geolocation
+        function findEdgar() {
+            const result = document.getElementById("location-result");
+
+            if (!navigator.geolocation) {
+                result.textContent =
+                    "Edgar escaped because this browser has no GPS!";
+                return;
+            }
+
+            result.textContent = "Searching the kingdom...";
+
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    result.innerHTML =
+                        "Edgar was discovered!<br>" +
+                        "Latitude: " + position.coords.latitude +
+                        "<br>Longitude: " + position.coords.longitude;
+                },
+
+                function () {
+                    result.textContent =
+                        "Edgar refused location permission and escaped!";
+                }
+            );
+        }
+
+        // Drag and drop
+        function dragCookie(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        function allowCookie(event) {
+            event.preventDefault();
+        }
+
+        function dropCookie(event) {
+            event.preventDefault();
+
+            const cookieId = event.dataTransfer.getData("text");
+            const cookie = document.getElementById(cookieId);
+            const dragonBox = document.getElementById("dragon-box");
+            const message = document.getElementById("dragon-message");
+
+            dragonBox.appendChild(cookie);
+
+            cookie.setAttribute("draggable", "false");
+            message.textContent =
+                "CRUNCH! Edgar's coding dragon is finally happy!";
+        }
+    </script>
+</body>
+</html>
